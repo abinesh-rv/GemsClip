@@ -2,45 +2,63 @@ package controllers
 
 import (
 	"backend/initializers"
-	"context"
+	"backend/models"
 	"encoding/json"
-	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"go.mongodb.org/mongo-driver/bson"
-	// "go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-// var companyCollection *mongo.Collection
-
-// func init(){
-//     companyCollection = initializers.MONGO.Database("GemsClip").Collection("Company")
-// }
 
 func GetCompany(c *gin.Context){
 
-	ctx := context.TODO()
-
-	companyCollection := initializers.MONGO.Database("GemsClip").Collection("Company")
-
-    cursor,err := companyCollection.Find(ctx,bson.M{})
+    cursor,err := initializers.CompanyCollection.Find(initializers.CTX,bson.D{})
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var results []bson.M
+	var results []models.CompanyBasicInfo
 
-	if err = cursor.All(ctx, &results); err != nil{
+	if err = cursor.All(initializers.CTX, &results); err != nil{
 		log.Fatal(err)
 	}
     
-    jsonData,err:= json.Marshal(results)
+	jsonData,err := json.Marshal(results)
 
 	if err != nil {
       log.Fatal(err)
 	}
 
-	fmt.Println(string(jsonData))
+	c.JSON(http.StatusOK,gin.H{
+		"data":string(jsonData),
+	})
+}
+
+func GetCompanyById(c *gin.Context){
+
+	ObjectId,err := primitive.ObjectIDFromHex(c.Param("id"))
+	log.Println(ObjectId)
+
+	if err != nil{
+		log.Fatal("error in converting string to objectId")
+	}
+    
+	var result models.Company
+
+	err=initializers.CompanyCollection.FindOne(initializers.CTX,bson.D{{Key: "_id",Value: ObjectId}}).Decode(&result)
+
+	if err != nil {
+		log.Fatal("in get company by objectid")
+	}
+
+	jsonData,_ := json.Marshal(result)
+
+	c.JSON(http.StatusOK,gin.H{
+		"data":string(jsonData),
+	})
+
 }

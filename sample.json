@@ -1,0 +1,129 @@
+{
+  "General": {
+    "CompanyId": 101,
+    "Status": "active",
+    "CompanyName": "Gems Clip Audit Services",
+    "CompanyShort": "GC",
+    "Services": ["ESI", "PF"],
+    "ESIPFCreatedBy": "Gems Clip",
+    "CompanyType": "Partnership",
+    "BusinessAddress": "98, Palaniappa Complex, New Pallipalayam road",
+    "City": "Bhavani",
+    "PostalCode": "638314",
+    "District": "Erode",
+    "State": "Tamil Nadu",
+    "ContactPersonName": "Anbarasu",
+    "ContactPersonRole": "Partner",
+    "ContactPersonMobile": "9865027890",
+    "ContactPersonWhatsapp": "9487757444",
+    "ContactPersonMailId": "audit.anbu@gmail.com"
+  },
+  "CompanyDetails": {
+    "CompanyPAN": "AAPFG7947M",
+    "PANDate": "2022-05-04T12:00:53.307Z",
+    "PANName": "Gowrishankar",
+    "GSTDate": "2022-05-04T12:00:53.307Z",
+    "BankAccountName": "Gems Clip Audit Services",
+    "BankAccountNumber": "135002000001818",
+    "IFSC": "IOBA0001350",
+    "BankType": "CA",
+    "BankName": "Indian Overseas Bank",
+    "BranchName": "Komarapalayam",
+    "LIN": "1114335670",
+    "CIN": "-",
+    "CINDate": "-",
+    "BranchAddress": "-",
+    "NatureOfBusiness": "Accounts and payroll",
+    "PartnerList": [
+      {
+        "AadhaarName": "Gowrishankar",
+        " DateOfBirth": "2022-05-04T12:00:53.307Z",
+        " AadhaarNumber": "123412341234",
+        " Address": "# 73, Kothukara kadu, Komarapalayam - 638183",
+        "PAN": "ANZPG8119J",
+        "Mobile": "9442612143",
+        "Email": "audit.gowri@gmail.com",
+        "Photo": "-"
+      }
+    ],
+    "GSTNumber": "33AAKFV6553H1ZW",
+    "City": "Erode",
+    "District": "Namakkal",
+    "PostalCode": "638314",
+    "State": "Tamil Nadu"
+  },
+  "Registration": {
+    "EPFO": {
+      "EPFOStatus": "Active",
+      "EPFOLogin": "CBSLM1665352000",
+      "EPFOPassword": "Gems*2017",
+      "EPFOCode": "CBSLM1665352000",
+      "EPFOCode type": "Main Code",
+      "EPFOMail ID": "audit.anbu@gmail.com",
+      "EPFOMobile": "9865027890",
+      "EPFOFilingSince": "2022-05-04T12:00:53.307Z",
+      "EPFODateOfCoverage": "2022-05-04T12:00:53.307Z",
+      "EPFOCoverageType": "b) Employment strength exceed 19 - EPF act under section 1(3)(b)",
+      "DSCStatus": "Active",
+      "DSCExpiryDate": "2022-05-04T12:00:53.307Z",
+      "DSCPassword": "12345678",
+      "ESignStatusEPFO": "Active",
+      "EPFOOfficeName": "Salem",
+      "EPFOOfficeAddress": "EPFO Regional Office Salem, Steel Plant Rd, Alavaipatti, Tamil Nadu 636302",
+      "EPFOOfficeContactNumber": "0427-2902043"
+    },
+    "ESIC": {
+      " ESICStatus": "Active",
+      " ESICLogin": "56001194770001019",
+      " ESICPassword": "vt@12345",
+      " ESICCode": "56001194770001019",
+      " ESICCodeType": "Main code",
+      " ESICMailId": "vinayaga2k@gmail.com",
+      " ESICMobile": "9842336767",
+      " ESICFilingSince": "2022-05-04T12:00:53.307Z",
+      " ESICDateOfCoverage": "2022-05-04T12:00:53.307Z",
+      " ESICOfficeName": "Salem",
+      " ESICOfficeAddress": "ESIC Office Salem, Steel Plant Rd, Alavaipatti, Tamil Nadu 636302",
+      " ESICOfficeContactNumber": "0427-2901587"
+    },
+    "ShramSuvidha": {
+      "ShramSuvidhaLogin": "anbarasu.r3@gmail.com",
+      "ShramSuvidhaPassword": "Gems$2017",
+      "ShramSuvidhaMailId": "anbarasu.r3@gmail.com",
+      "ShramSuvidhaMobile": "9865027890",
+      "NearestPoliceStation": "Komarapalayam",
+      "NICCode": "G-47300",
+      "BusinessPlace": "Komarapalayam",
+      "DateOfApplication": "2022-05-04T12:00:53.307Z",
+      "LeaseDateFrom": "2022-05-04T12:00:53.307Z",
+      "LeaseDateTo": "2022-05-04T12:00:53.307Z"
+    },
+    "IF": {
+      "IFStatus": "Active",
+      "IFLogin": "sshubamtraders@gmail.com",
+      "IFPassword": "SSS@20231",
+      "IFLicenseNumber": "TPR17613",
+      "IFMailId": "sshubamtraders@gmail.com",
+      "IFMobile ": "9362046659",
+      "IFDateOfRegistration": "2022-05-04T12:00:53.307Z",
+      "IFRenewalCharges": 7200,
+      "IFRenwalSince": "2022-05-04T12:00:53.307Z",
+      "NumberOfPressureVessels": 1,
+      "ISMLogin": "sshubamtraders@gmail.com",
+      "ISMPassword": "SSSism*2020"
+    }
+  },
+  "ContactList": [
+    {
+      "ContactName": "Anbarasu",
+      "Designation": "Accountant",
+      "Email": "audit.anbu@gmail.com",
+      "Mobile": "1234567890"
+    }
+  ],
+  "Fee": {
+    "Services": ["ESI", "PF"],
+    "Period": "monthly",
+    "Fee": 2500
+  }
+}

@@ -8,7 +8,6 @@ import {
 } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
-import { redirect } from "react-router-dom";
 
 import React, { useState } from "react";
 
@@ -20,10 +19,6 @@ function SideDrawer() {
     <Box
       sx={{
         p: 2,
-        height: "93vh",
-        borderRight: 1,
-        borderRightWidth: "0.5px",
-        borderRightColor: "primary.main",
       }}
     >
       <List>

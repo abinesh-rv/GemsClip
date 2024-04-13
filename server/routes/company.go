@@ -11,5 +11,6 @@ import (
 func CompanyHandler(companyRoutes *gin.RouterGroup){
 
 	companyRoutes.GET("/",controllers.GetCompany)
+	companyRoutes.GET("/:id",controllers.GetCompanyById)
 
 }

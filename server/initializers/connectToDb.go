@@ -11,6 +11,8 @@ import (
 
 
 var MONGO *mongo.Client
+var CompanyCollection *mongo.Collection
+var CTX context.Context
 
 func ConnectToDb(){
 
@@ -26,5 +28,10 @@ func ConnectToDb(){
 	}
 
 	MONGO = client
+
+	CompanyCollection = MONGO.Database("GemsClip").Collection("company")
+
+	CTX = context.TODO()
+
 
 }

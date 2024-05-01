@@ -42,6 +42,7 @@ type Partner struct {
     AadhaarNumber  string    `bson:"AadhaarNumber"`
     Address        string    `bson:"Address"`
     PAN            string    `bson:"PAN"`
+    PANName        string    `bson:"PANName"`
     Mobile         string    `bson:"Mobile"`
     Email          string    `bson:"Email"`
     Photo          string    `bson:"Photo"`
@@ -60,11 +61,15 @@ type CompanyDetails struct {
     BranchName         string    `bson:"BranchName"`
     LIN                string    `bson:"LIN"`
     CIN                string    `bson:"CIN"`
-    CINDate            string    `bson:"CINDate"`
+    CINDate            time.Time   `bson:"CINDate"`
     BranchAddress      string    `bson:"BranchAddress"`
     NatureOfBusiness   string    `bson:"NatureOfBusiness"`
-    PartnerList        []Partner `bson:"PartnerList"`
     GSTNumber          string    `bson:"GSTNumber"`
+    City               string    `bson:"City"`
+    PostalCode         string    `bson:"PostalCode"`
+    District           string    `bson:"District"`
+    State              string    `bson:"State"`
+    PartnerList        []Partner `bson:"PartnerList"`
 }
 
 type EPFO struct {
@@ -73,7 +78,7 @@ type EPFO struct {
     EPFOPassword          string    `bson:"EPFOPassword"`
     EPFOCode              string    `bson:"EPFOCode"`
     EPFOCodeType          string    `bson:"EPFOCodeType"`
-    EPFOMailID            string    `bson:"EPFOMailID"`
+    EPFOMailId            string    `bson:"EPFOMailId"`
     EPFOMobile            string    `bson:"EPFOMobile"`
     EPFOFilingSince       time.Time `bson:"EPFOFilingSince"`
     EPFODateOfCoverage    time.Time `bson:"EPFODateOfCoverage"`
@@ -143,16 +148,18 @@ type Fee struct {
     Fee      int      `bson:"Fee"`
 }
 
+type Registration struct {
+    EPFO       EPFO       `bson:"EPFO"`
+    ESIC       ESIC       `bson:"ESIC"`
+    ShramSuvidha ShramSuvidha `bson:"ShramSuvidha"`
+    IF         IF         `bson:"IF"`
+}
+
 type Company struct {
     Id           primitive.ObjectID `bson:"_id,omitempty"`
     General      General             `bson:"General"`
     CompanyDetails CompanyDetails    `bson:"CompanyDetails"`
-    Registration struct {
-        EPFO       EPFO       `bson:"EPFO"`
-        ESIC       ESIC       `bson:"ESIC"`
-        ShramSuvidha ShramSuvidha `bson:"ShramSuvidha"`
-        IF         IF         `bson:"IF"`
-    } `bson:"Registration"`
+    Registration   Registration       `bson:"Registration"`
     ContactList []Contact `bson:"ContactList"`
     Fee         Fee       `bson:"Fee"`
 }

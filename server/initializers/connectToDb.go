@@ -33,5 +33,4 @@ func ConnectToDb(){
 
 	CTX = context.TODO()
 
-
 }

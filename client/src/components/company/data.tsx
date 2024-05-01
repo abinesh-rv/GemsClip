@@ -1,4 +1,4 @@
-import { EDataFieldType } from "./types";
+import { EDataFieldType, TCompanyInfo, TContact, TPartner } from "./types";
 
 export const companyGeneralData = [
   {
@@ -123,7 +123,7 @@ export const companyDetailsData = [
   {
     name: "GST Number",
     value: "",
-    type: EDataFieldType.Number,
+    type: EDataFieldType.String,
   },
   {
     name: "GST Date",
@@ -141,7 +141,7 @@ export const companyDetailsData = [
     type: EDataFieldType.String,
   },
   {
-    name: "IFSE",
+    name: "IFSC",
     value: "",
     type: EDataFieldType.String,
   },
@@ -203,7 +203,7 @@ export const companyDetailsData = [
     type: EDataFieldType.String,
   },
   {
-    name: "Nature of Business",
+    name: "Nature Of Business",
     value: "",
     type: EDataFieldType.String,
   },
@@ -216,7 +216,7 @@ export const CompanyDetailsPeopleData = [
     type: EDataFieldType.String,
   },
   {
-    name: " Date Of Birth",
+    name: "Date Of Birth",
     value: "",
     type: EDataFieldType.Date,
   },
@@ -251,14 +251,37 @@ export const CompanyDetailsPeopleData = [
     type: EDataFieldType.Email,
   },
   {
-    name: "DIN",
+    name: "Photo",
+    value: "",
+    type: EDataFieldType.String,
+  },
+];
+
+export const CompanyDetailsPeopleBasicData = [
+  {
+    name: "Aadhaar Name",
+    value: "",
+    type: EDataFieldType.String,
+  },
+  {
+    name: "Aadhaar Number",
     value: "",
     type: EDataFieldType.Number,
   },
   {
-    name: "Photo",
+    name: "PAN",
     value: "",
     type: EDataFieldType.String,
+  },
+  {
+    name: "Mobile",
+    value: "",
+    type: EDataFieldType.Phone,
+  },
+  {
+    name: "Email",
+    value: "",
+    type: EDataFieldType.Email,
   },
 ];
 
@@ -292,8 +315,8 @@ export const ContactListData = [
 export const FeeDetailsData = [
   {
     name: "Services",
-    value: "",
-    type: EDataFieldType.Date,
+    value: [],
+    type: EDataFieldType.Dropdown,
     dropDownType: "multiple",
     data: ["ESIC", "EPFO", "IF", "PV", "LWF", "PT"],
   },
@@ -354,12 +377,12 @@ export const EpfoData = [
     type: EDataFieldType.Phone,
   },
   {
-    name: "EPFO Filling Since",
+    name: "EPFO Filing Since",
     value: "",
     type: EDataFieldType.Date,
   },
   {
-    name: "EPFO Date of Coverage",
+    name: "EPFO Date Of Coverage",
     value: "",
     type: EDataFieldType.Date,
   },
@@ -391,14 +414,14 @@ export const EpfoData = [
     type: EDataFieldType.String,
   },
   {
-    name: "e Sign Status - EPFO",
+    name: "E Sign Status EPFO",
     value: [],
     type: EDataFieldType.Dropdown,
     dropDownType: "single",
     data: ["Active", "Inactive", "Under Process"],
   },
   {
-    name: "EPFO Office name",
+    name: "EPFO Office Name",
     value: "",
     type: EDataFieldType.String,
   },
@@ -426,10 +449,8 @@ export const EsicData = [
   },
   {
     name: "ESIC Login",
-    value: [],
-    type: EDataFieldType.Dropdown,
-    dropDownType: "single",
-    data: ["Active", "Inactive", "Hold"],
+    value: "",
+    type: EDataFieldType.String,
   },
   {
     name: "ESIC Password",
@@ -459,17 +480,17 @@ export const EsicData = [
     type: EDataFieldType.Phone,
   },
   {
-    name: "ESIC Filling Since",
+    name: "ESIC Filing Since",
     value: "",
     type: EDataFieldType.Date,
   },
   {
-    name: "ESIC Date of Coverage",
+    name: "ESIC Date Of Coverage",
     value: "",
     type: EDataFieldType.Date,
   },
   {
-    name: "ESIC Office name",
+    name: "ESIC Office Name",
     value: "",
     type: EDataFieldType.String,
   },
@@ -499,7 +520,7 @@ export const ShramSuvidhaData = [
     type: EDataFieldType.String,
   },
   {
-    name: "Shram Suvidha Mail ID",
+    name: "Shram Suvidha Mail Id",
     value: "",
     type: EDataFieldType.Email,
   },
@@ -519,7 +540,7 @@ export const ShramSuvidhaData = [
     type: EDataFieldType.String,
   },
   {
-    name: "Date of Application",
+    name: "Date Of Application",
     value: "",
     type: EDataFieldType.Date,
   },
@@ -531,12 +552,12 @@ export const ShramSuvidhaData = [
     data: ["Owned", "Leased"],
   },
   {
-    name: "Lease Date from",
+    name: "Lease Date From",
     value: "",
     type: EDataFieldType.Date,
   },
   {
-    name: "Lease Date to",
+    name: "Lease Date To",
     value: "",
     type: EDataFieldType.Date,
   },
@@ -569,7 +590,7 @@ export const IfData = [
     type: EDataFieldType.String,
   },
   {
-    name: "IF Mail ID",
+    name: "IF Mail Id",
     value: "",
     type: EDataFieldType.Email,
   },
@@ -579,7 +600,7 @@ export const IfData = [
     type: EDataFieldType.Phone,
   },
   {
-    name: "IF Date of Registration",
+    name: "IF Date Of Registration",
     value: "",
     type: EDataFieldType.Date,
   },
@@ -594,7 +615,7 @@ export const IfData = [
     type: EDataFieldType.Date,
   },
   {
-    name: "Number of Pressure Vessels",
+    name: "Number Of Pressure Vessels",
     value: "",
     type: EDataFieldType.Number,
   },
@@ -611,3 +632,134 @@ export const IfData = [
 ];
 
 /* ------------------------------------------------------------------------------------------------------ */
+
+export const emptyCompanyData: TCompanyInfo = {
+  General: {
+    CompanyName: "",
+    CompanyShort: "",
+    CompanyId: 0,
+    Services: [],
+    ESIPFCreatedBy: "",
+    CompanyType: "",
+    Status: "",
+    BusinessAddress: "",
+    City: "",
+    PostalCode: "",
+    District: "",
+    State: "",
+    ContactPersonName: "",
+    ContactPersonRole: "",
+    ContactPersonMobile: "",
+    ContactPersonWhatsapp: "",
+    ContactPersonMailId: "",
+  },
+  CompanyDetails: {
+    CompanyPAN: "",
+    PANDate: "",
+    PANName: "",
+    GSTDate: "",
+    BankAccountName: "",
+    BankAccountNumber: "",
+    IFSC: "",
+    BankType: "",
+    BankName: "",
+    BranchName: "",
+    LIN: "",
+    CIN: "",
+    CINDate: "",
+    BranchAddress: "",
+    NatureOfBusiness: "",
+    GSTNumber: "",
+    City: "",
+    PostalCode: 0,
+    District: "",
+    State: "",
+    PartnerList: [],
+  },
+  Registration: {
+    EPFO: {
+      EPFOStatus: "",
+      EPFOLogin: "",
+      EPFOPassword: "",
+      EPFOCode: "",
+      EPFOCodeType: "",
+      EPFOMailId: "",
+      EPFOMobile: "",
+      EPFOFilingSince: "",
+      EPFODateOfCoverage: "",
+      EPFOCoverageType: "",
+      DSCStatus: "",
+      DSCExpiryDate: "",
+      DSCPassword: "",
+      ESignStatusEPFO: "",
+      EPFOOfficeName: "",
+      EPFOOfficeAddress: "",
+      EPFOOfficeContactNumber: "",
+    },
+    ESIC: {
+      ESICStatus: "",
+      ESICLogin: "",
+      ESICPassword: "",
+      ESICCode: "",
+      ESICCodeType: "",
+      ESICMailId: "",
+      ESICMobile: "",
+      ESICFilingSince: "",
+      ESICDateOfCoverage: "",
+      ESICOfficeName: "",
+      ESICOfficeAddress: "",
+      ESICOfficeContactNumber: "",
+    },
+    ShramSuvidha: {
+      ShramSuvidhaLogin: "",
+      ShramSuvidhaPassword: "",
+      ShramSuvidhaMailId: "",
+      ShramSuvidhaMobile: "",
+      NearestPoliceStation: "",
+      NICCode: "",
+      BusinessPlace: "",
+      DateOfApplication: "",
+      LeaseDateFrom: "",
+      LeaseDateTo: "",
+    },
+    IF: {
+      IFStatus: "",
+      IFLogin: "",
+      IFPassword: "",
+      IFLicenseNumber: "",
+      IFMailId: "",
+      IFMobile: "",
+      IFDateOfRegistration: "",
+      IFRenewalCharges: 0,
+      IFRenwalSince: "",
+      NumberOfPressureVessels: 0,
+      ISMLogin: "",
+      ISMPassword: "",
+    },
+  },
+  ContactList: [],
+  Fee: {
+    Services: [],
+    Period: "",
+    Fee: 0,
+  },
+};
+
+export const emptyParterData: TPartner = {
+  AadhaarName: "",
+  DateOfBirth: "",
+  AadhaarNumber: "",
+  Address: "",
+  PAN: "",
+  PANName: "",
+  Mobile: "",
+  Email: "",
+  Photo: "",
+};
+
+export const emptyContactPersonData: TContact = {
+  ContactName: "",
+  Designation: "",
+  Email: "",
+  Mobile: "",
+};

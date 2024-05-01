@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,8 +9,10 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { TCompanyBasicInfo } from "./types";
 import { useNavigate } from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 function CompanyList() {
+  const [tableData, setTableData] = useState<TCompanyBasicInfo[] | undefined>();
   const navigate = useNavigate();
   const companyList = [
     "S.No",
@@ -24,22 +26,24 @@ function CompanyList() {
   ];
 
   const fetchCompanyListData = async () => {
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/company/`);
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/company`);
     let { data } = await res.json();
     data = JSON.parse(data);
-    return data;
+    setTableData(data);
   };
 
-  const { isSuccess, data } = useQuery({
-    queryKey: ["company"],
-    queryFn: fetchCompanyListData,
-  });
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchCompanyListData();
+    };
+    fetchData();
+  }, []);
 
   return (
     <Stack spacing={2}>
       <Stack direction={"row"} justifyContent={"space-between"}>
         <Typography variant="h4">Company List</Typography>
-        <Button onClick={() => navigate("0")}>Create</Button>
+        <Button onClick={() => navigate("create")}>Create</Button>
       </Stack>
       <TableContainer>
         <Table stickyHeader>
@@ -51,8 +55,8 @@ function CompanyList() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isSuccess &&
-              data.map((company: TCompanyBasicInfo, index: number) => {
+            {tableData != undefined &&
+              tableData.map((company: TCompanyBasicInfo, index: number) => {
                 company.General.Services = company.General.Services.toString();
                 return (
                   <TableRow key={index}>
@@ -64,7 +68,12 @@ function CompanyList() {
                     <TableCell>{company.General.Services}</TableCell>
                     <TableCell>{company.General.Status}</TableCell>
                     <TableCell>
-                      <Button onClick={() => navigate(`${company.Id}`)}>
+                      <Button onClick={() => navigate(`${company._id}`)}>
+                        <VisibilityIcon
+                          color="info"
+                          fontSize="small"
+                          sx={{ mr: 1 }}
+                        />
                         View
                       </Button>
                     </TableCell>

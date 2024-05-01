@@ -13,7 +13,7 @@ function App() {
           <Outlet />
         </Container>
       </MainLayout>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

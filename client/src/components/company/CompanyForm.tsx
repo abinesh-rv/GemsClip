@@ -1,5 +1,5 @@
-import React from "react";
-import { UseFormRegister } from "react-hook-form";
+import React, { useEffect } from "react";
+import { Control, Controller, UseFormRegister } from "react-hook-form";
 import { EDataFieldType, TCompany, TGeneral } from "./types";
 import {
   CompanyDetailsPeopleData,
@@ -26,12 +26,14 @@ import {
 
 function CompanyForm({
   register,
+  editMode,
   data,
   name,
-  peopleData,
-  inputData,
+  control,
 }: {
-  register: UseFormRegister<TCompany>;
+  register: UseFormRegister<any>;
+  editMode: boolean;
+  control: Control;
   data:
     | typeof companyGeneralData
     | typeof companyDetailsData
@@ -42,8 +44,6 @@ function CompanyForm({
     | typeof ShramSuvidhaData
     | typeof IfData;
   name: string;
-  peopleData?: typeof CompanyDetailsPeopleData;
-  inputData?: TGeneral;
 }) {
   return (
     <Stack spacing={2}>
@@ -54,84 +54,129 @@ function CompanyForm({
               <Stack spacing={1} sx={{ m: 2 }}>
                 <Typography>{value.name}</Typography>
                 {value.type == EDataFieldType.Number && (
-                  <TextField variant="outlined" type="number" fullWidth />
+                  <TextField
+                    variant="outlined"
+                    InputProps={{ readOnly: !editMode }}
+                    {...register(
+                      `Company.${name.replaceAll(
+                        " ",
+                        ""
+                      )}.${value.name.replaceAll(" ", "")}`
+                    )}
+                    type="number"
+                    fullWidth
+                  />
                 )}
                 {value.type == EDataFieldType.String && (
-                  <TextField variant="outlined" type="text" fullWidth />
-                )}
-                {value.type == EDataFieldType.Dropdown && (
-                  <Select
-                    fullWidth
-                    multiple={
-                      (value as { dropDownType: string }).dropDownType ==
-                      "multiple"
-                        ? true
-                        : false
-                    }
-                    value={[]}
-                  >
-                    {(value as { data: string[] }).data.map(
-                      (value: string, index: number) => (
-                        <MenuItem key={index}>{value}</MenuItem>
-                      )
+                  <TextField
+                    variant="outlined"
+                    InputProps={{ readOnly: !editMode }}
+                    type="text"
+                    {...register(
+                      `Company.${name.replaceAll(
+                        " ",
+                        ""
+                      )}.${value.name.replaceAll(" ", "")}`
                     )}
-                  </Select>
+                    fullWidth
+                  />
+                )}
+
+                {value.type == EDataFieldType.Dropdown && (
+                  <Controller
+                    name={`Company.${name.replaceAll(
+                      " ",
+                      ""
+                    )}.${value.name.replaceAll(" ", "")}`}
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <Select
+                          fullWidth
+                          readOnly={!editMode}
+                          multiple={
+                            (value as { dropDownType: string }).dropDownType ==
+                            "multiple"
+                              ? true
+                              : false
+                          }
+                          value={field.value}
+                          onChange={field.onChange}
+                        >
+                          {(value as { data: string[] }).data.map(
+                            (value: string, index: number) => (
+                              <MenuItem key={index} value={value}>
+                                {value}
+                              </MenuItem>
+                            )
+                          )}
+                        </Select>
+                      );
+                    }}
+                  />
                 )}
                 {value.type == EDataFieldType.Phone && (
-                  <TextField variant="outlined" type="tel" fullWidth />
+                  <TextField
+                    variant="outlined"
+                    InputProps={{ readOnly: !editMode }}
+                    type="tel"
+                    {...register(
+                      `Company.${name.replaceAll(
+                        " ",
+                        ""
+                      )}.${value.name.replaceAll(" ", "")}`
+                    )}
+                    fullWidth
+                  />
                 )}
                 {value.type == EDataFieldType.Email && (
-                  <TextField variant="outlined" type="email" fullWidth />
+                  <TextField
+                    variant="outlined"
+                    InputProps={{ readOnly: !editMode }}
+                    type="email"
+                    {...register(
+                      `Company.${name.replaceAll(
+                        " ",
+                        ""
+                      )}.${value.name.replaceAll(" ", "")}`
+                    )}
+                    fullWidth
+                  />
                 )}
                 {value.type == EDataFieldType.Date && (
-                  <TextField variant="outlined" type="date" fullWidth />
+                  <Controller
+                    name={`Company.${name.replaceAll(
+                      " ",
+                      ""
+                    )}.${value.name.replaceAll(" ", "")}`}
+                    control={control}
+                    render={({ field: { onChange, value } }) => {
+                      let date: any = new Date(value);
+
+                      date = `${date.getFullYear()}-${String(
+                        date.getMonth() + 1
+                      ).padStart(2, "0")}-${String(date.getDate()).padStart(
+                        2,
+                        "0"
+                      )}`;
+                      return (
+                        <TextField
+                          variant="outlined"
+                          InputProps={{ readOnly: !editMode }}
+                          type="date"
+                          value={date}
+                          fullWidth
+                          onChange={onChange}
+                        />
+                      );
+                    }}
+                  />
                 )}
               </Stack>
             </Grid>
           );
         })}
       </Grid>
-      {name == "Company Details" && (
-        <>
-          <Stack
-            direction={"row"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <Typography>People List</Typography>
-            <Button>Add</Button>
-          </Stack>
-
-          <Grid container>
-            {peopleData != undefined &&
-              peopleData.map((value, index) => {
-                return (
-                  <Grid item xs={6} key={index}>
-                    <Stack spacing={1} sx={{ m: 2 }}>
-                      <Typography>{value.name}</Typography>
-
-                      {value.type == EDataFieldType.Number && (
-                        <TextField variant="outlined" type="number" fullWidth />
-                      )}
-                      {value.type == EDataFieldType.String && (
-                        <TextField variant="outlined" type="text" fullWidth />
-                      )}
-                      {value.type == EDataFieldType.Phone && (
-                        <TextField variant="outlined" type="tel" fullWidth />
-                      )}
-                      {value.type == EDataFieldType.Email && (
-                        <TextField variant="outlined" type="email" fullWidth />
-                      )}
-                      {value.type == EDataFieldType.Date && (
-                        <TextField variant="outlined" type="date" fullWidth />
-                      )}
-                    </Stack>
-                  </Grid>
-                );
-              })}
-          </Grid>
-        </>
-      )}
     </Stack>
   );
 }

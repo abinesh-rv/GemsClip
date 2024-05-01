@@ -4,6 +4,7 @@ import (
 	"backend/initializers"
 	"backend/models"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
@@ -41,7 +42,6 @@ func GetCompany(c *gin.Context){
 func GetCompanyById(c *gin.Context){
 
 	ObjectId,err := primitive.ObjectIDFromHex(c.Param("id"))
-	log.Println(ObjectId)
 
 	if err != nil{
 		log.Fatal("error in converting string to objectId")
@@ -49,10 +49,10 @@ func GetCompanyById(c *gin.Context){
     
 	var result models.Company
 
-	err=initializers.CompanyCollection.FindOne(initializers.CTX,bson.D{{Key: "_id",Value: ObjectId}}).Decode(&result)
+	err = initializers.CompanyCollection.FindOne(initializers.CTX,bson.D{{Key: "_id",Value: ObjectId}}).Decode(&result)
 
 	if err != nil {
-		log.Fatal("in get company by objectid")
+		fmt.Println(err)
 	}
 
 	jsonData,_ := json.Marshal(result)
@@ -60,5 +60,27 @@ func GetCompanyById(c *gin.Context){
 	c.JSON(http.StatusOK,gin.H{
 		"data":string(jsonData),
 	})
+
+}
+
+func UpdateCompanyById(c *gin.Context){
+
+	ObjectId,err := primitive.ObjectIDFromHex(c.Param("id"))
+
+	if err != nil{
+		log.Fatal("error in converting string to objectId")
+	}
+
+	var company models.Company
+
+	c.Bind(&company)
+
+	_,err = initializers.CompanyCollection.ReplaceOne(initializers.CTX,bson.D{{Key: "_id",Value: ObjectId}},company)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+	
+	GetCompanyById(c);
 
 }

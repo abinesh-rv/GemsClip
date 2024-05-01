@@ -9,10 +9,11 @@ export enum EDataFieldType {
 
 export type TPartner = {
   AadhaarName: string;
-  DateOfBirth: Date;
+  DateOfBirth: string;
   AadhaarNumber: string;
   Address: string;
   PAN: string;
+  PANName: string;
   Mobile: string;
   Email: string;
   Photo: string;
@@ -40,9 +41,9 @@ export type TGeneral = {
 
 export type TCompanyDetails = {
   CompanyPAN: string;
-  PANDate: Date;
+  PANDate: string;
   PANName: string;
-  GSTDate: Date;
+  GSTDate: string;
   BankAccountName: string;
   BankAccountNumber: string;
   IFSC: string;
@@ -52,6 +53,10 @@ export type TCompanyDetails = {
   LIN: string;
   CIN: string;
   CINDate: string;
+  PostalCode: number;
+  City: string;
+  District: string;
+  State: string;
   BranchAddress: string;
   NatureOfBusiness: string;
   PartnerList: TPartner[];
@@ -64,13 +69,13 @@ export type TEPFO = {
   EPFOPassword: string;
   EPFOCode: string;
   EPFOCodeType: string;
-  EPFOMailID: string;
+  EPFOMailId: string;
   EPFOMobile: string;
-  EPFOFilingSince: Date;
-  EPFODateOfCoverage: Date;
+  EPFOFilingSince: string;
+  EPFODateOfCoverage: string;
   EPFOCoverageType: string;
   DSCStatus: string;
-  DSCExpiryDate: Date;
+  DSCExpiryDate: string;
   DSCPassword: string;
   ESignStatusEPFO: string;
   EPFOOfficeName: string;
@@ -86,8 +91,8 @@ export type TESIC = {
   ESICCodeType: string;
   ESICMailId: string;
   ESICMobile: string;
-  ESICFilingSince: Date;
-  ESICDateOfCoverage: Date;
+  ESICFilingSince: string;
+  ESICDateOfCoverage: string;
   ESICOfficeName: string;
   ESICOfficeAddress: string;
   ESICOfficeContactNumber: string;
@@ -101,9 +106,9 @@ export type TShramSuvidha = {
   NearestPoliceStation: string;
   NICCode: string;
   BusinessPlace: string;
-  DateOfApplication: Date;
-  LeaseDateFrom: Date;
-  LeaseDateTo: Date;
+  DateOfApplication: string;
+  LeaseDateFrom: string;
+  LeaseDateTo: string;
 };
 
 export type TIF = {
@@ -113,9 +118,9 @@ export type TIF = {
   IFLicenseNumber: string;
   IFMailId: string;
   IFMobile: string;
-  IFDateOfRegistration: Date;
+  IFDateOfRegistration: string;
   IFRenewalCharges: number;
-  IFRenwalSince: Date;
+  IFRenwalSince: string;
   NumberOfPressureVessels: number;
   ISMLogin: string;
   ISMPassword: string;
@@ -134,8 +139,8 @@ export type TFee = {
   Fee: number;
 };
 
-export type TCompany = {
-  Id?: string;
+export type TCompanyInfo = {
+  _id?: string;
   General?: TGeneral;
   CompanyDetails?: TCompanyDetails;
   Registration?: {
@@ -144,12 +149,16 @@ export type TCompany = {
     ShramSuvidha?: TShramSuvidha;
     IF?: TIF;
   };
-  ContactList: TContact[];
-  Fee: TFee;
+  ContactList?: TContact[];
+  Fee?: TFee;
+};
+
+export type TCompany = {
+  Company?: TCompanyInfo;
 };
 
 export type TCompanyBasicInfo = {
-  Id: string;
+  _id: string;
   General: TGeneral;
 };
 
@@ -175,10 +184,10 @@ export type TCompanyBasicInfo = {
 
 // type TCompanyDetails = {
 //   companyPan: string;
-//   panDate: Date;
+//   panDate: string;
 //   panName: string;
 //   gstNumber: string;
-//   gstDate: Date;
+//   gstDate: string;
 //   bankAccountName: string;
 //   bankAccountNumber: number;
 //   ifsc: string;
@@ -187,7 +196,7 @@ export type TCompanyBasicInfo = {
 //   branchName: string;
 //   lin: number;
 //   cin?: string;
-//   cinDate?: Date;
+//   cinDate?: string;
 //   branchAddress: string;
 //   city: string;
 //   postalCode: number;
@@ -198,7 +207,7 @@ export type TCompanyBasicInfo = {
 
 // type TCompanyPeople = {
 //   aadhaarName: string;
-//   dateOfBirth: Date;
+//   dateOfBirth: string;
 //   aadhaarNumber: number;
 //   address: string;
 //   pan: string;
@@ -219,11 +228,11 @@ export type TCompanyBasicInfo = {
 //   epfoCodeType: string;
 //   epfoMailID: string;
 //   epfoMobile: number;
-//   epfoFilingSince: Date;
-//   epfoDateOfCoverage: Date;
+//   epfoFilingSince: string;
+//   epfoDateOfCoverage: string;
 //   epfoCoverageType: string;
 //   dscStatus: "Active" | "Inactive" | "Expired";
-//   dscExpiryDate?: Date;
+//   dscExpiryDate?: string;
 //   dscPassword?: string;
 //   eSignStatusEPFO: "Active" | "Inactive" | "Under Process";
 //   epfoOfficeName: string;
@@ -240,7 +249,7 @@ export type TCompanyBasicInfo = {
 //   esicMailID: string;
 //   esicMobile: number;
 //   esicFilingSince: string;
-//   esicDateOfCoverage: Date;
+//   esicDateOfCoverage: string;
 //   esicOfficeName: string;
 //   esicOfficeAddress: string;
 //   esicOfficeContactNumber: number;
@@ -253,10 +262,10 @@ export type TCompanyBasicInfo = {
 //   shramSuvidhaMobile: number;
 //   nearestPoliceStation: string;
 //   nicCode: string;
-//   dateOfApplication: Date;
+//   dateOfApplication: string;
 //   businessPlace: "Owned" | "Leased";
-//   leaseDateFrom: Date;
-//   leaseDateTo: Date;
+//   leaseDateFrom: string;
+//   leaseDateTo: string;
 // };
 
 // type TIf = {
@@ -266,9 +275,9 @@ export type TCompanyBasicInfo = {
 //   ifLicenseNumber: string;
 //   ifMailID: string;
 //   ifMobile: number;
-//   ifDateOfRegistration: Date;
+//   ifDateOfRegistration: string;
 //   ifRenewalCharges: number;
-//   ifRenewalSince: Date;
+//   ifRenewalSince: string;
 //   numberOfPressureVessels: number;
 //   ismLogin: string;
 //   ismPassword: string;
